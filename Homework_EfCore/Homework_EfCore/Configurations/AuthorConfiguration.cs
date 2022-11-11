@@ -11,6 +11,7 @@ namespace Homework_EfCore.Configurations
             builder.HasKey(author => author.AuthorId);
             builder.Property(author => author.FirstName).HasMaxLength(100).IsRequired();
             builder.Property(author => author.LastName).HasMaxLength(100).IsRequired();
+            builder.Property(author => author.Country).HasMaxLength(100).IsRequired();
             builder.Property(author => author.BirthDate).IsRequired();
             builder.HasIndex(author => new { author.FirstName, author.LastName }).IsUnique();
         }
