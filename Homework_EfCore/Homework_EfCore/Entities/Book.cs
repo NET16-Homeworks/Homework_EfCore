@@ -8,5 +8,7 @@
         public int Year { get; set; }
 
         public Author Author { get; set; }
+        public ICollection<User> Users { get; set; }
+        public ICollection<UserBook> UserBooks { get; set; }
     }
 }

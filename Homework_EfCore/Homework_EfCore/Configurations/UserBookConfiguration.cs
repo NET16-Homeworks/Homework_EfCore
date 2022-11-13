@@ -8,7 +8,7 @@ namespace Homework_EfCore.Configurations
     {
         public void Configure(EntityTypeBuilder<UserBook> builder)
         {
-            // need to config further
+            builder.HasKey(userBook => userBook.UserBookId);
         }
     }
 }
