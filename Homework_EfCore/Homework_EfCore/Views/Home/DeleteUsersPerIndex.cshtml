@@ -1,0 +1,18 @@
+﻿@model int
+@{
+    ViewBag.Title = "Removed users per index";
+}
+
+<p>Please indicate the index of the user in the list you want to delete:</p>
+
+@using (@Html.BeginForm())
+{
+
+@Html.TextBox("Index")
+
+<button type="submit">Delete</button>
+}
+
+<hr>
+
+@Html.ActionLink("To Users' page", "GetUsersInfo")
