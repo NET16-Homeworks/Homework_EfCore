@@ -5,37 +5,38 @@ namespace Homework_EfCore.Controllers;
 
 public class HomeController : Controller
 {
-
+    private DBService dbservice = new DBService();
     public IActionResult Index()
     {
-        DBService.info = message => ViewData["Info"] += message + "\n";
+        dbservice.info = message => ViewData["Info"] += message + "\r\n";
         return View();
     }
 
     public async Task<IActionResult> BorrowedBooks()
     {
-        DBService.info = message => ViewData["Info"] += message + "\n";
-        return View(await DBService.ReturnBorrowedBooksData());
+        dbservice.info = message => ViewData["Info"] += message + "\r\n";
+        return View(await dbservice.ReturnBorrowedBooksData());
     }
 
     public async Task<IActionResult> RemoveUselessUsers()
     {
-        DBService.info = message => ViewData["Info"] += message + "\n";
-        await DBService.RemoveUselessUsers();
+        dbservice.info = message => ViewData["Info"] += message + "\r\n";
+        await dbservice.RemoveUselessUsers();
         return View();
     }
-        [HttpGet]
+
+    [HttpGet]
     public async Task<IActionResult> ReturnBook()
     {
-        DBService.info = message => ViewData["Info"] += message + "\n";
+        dbservice.info = message => ViewData["Info"] += message + "\r\n";
         return View();
     }
 
     [HttpPost]
     public async Task<IActionResult> ReturnBook(string userEmail, string bookName)
     {
-        DBService.info = message => ViewData["Info"] += message + "\n";
-        await DBService.ReturnBookFromUser(userEmail, bookName);
+        dbservice.info = message => ViewData["Info"] += message + "\r\n";
+        await dbservice.ReturnBookFromUser(userEmail, bookName);
         return View();
     }
 }

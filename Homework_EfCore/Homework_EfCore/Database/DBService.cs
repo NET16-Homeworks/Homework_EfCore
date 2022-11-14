@@ -5,12 +5,11 @@ using Microsoft.VisualBasic;
 
 namespace Homework_EfCore.Database
 {
-    public static class DBService
+    public class DBService
     {
-        public delegate void DBInfo(string info);
-        public static DBInfo info;
+        public Action<string> info;
 
-        public async static Task AddUser(string firstName, string lastName, string email, DateTime birthDate)
+        public async Task AddUser(string firstName, string lastName, string email, DateTime birthDate)
         {
             using (MyDBContext db = new MyDBContext())
             {
@@ -27,7 +26,7 @@ namespace Homework_EfCore.Database
             }
         }
 
-        public async static Task AddAuthor(string firstName, string lastName, string country, DateTime birthDate)
+        public async Task AddAuthor(string firstName, string lastName, string country, DateTime birthDate)
         {
             using (MyDBContext db = new MyDBContext())
             {
@@ -43,7 +42,7 @@ namespace Homework_EfCore.Database
             }
         }
 
-        public async static Task AddBook(string name, int year, string authorLastName)
+        public async Task AddBook(string name, int year, string authorLastName)
         {
             using (MyDBContext db = new MyDBContext())
             {
@@ -63,7 +62,7 @@ namespace Homework_EfCore.Database
             }
         }
 
-        private static async Task<Author> _ReturnAuthorByName(string lastName)
+        private async Task<Author> _ReturnAuthorByName(string lastName)
         {
             using (MyDBContext db = new MyDBContext())
             {
@@ -71,24 +70,24 @@ namespace Homework_EfCore.Database
             }
         }
 
-        public static async Task AddData()
+        public async Task AddData()
         {
-            await DBService.AddUser("Ilya", "Maximov", "IlyaMaximov@Email.com", new DateTime(2002, 11, 21));
-            await DBService.AddUser("Andrei", "Polevoi", "ANDRUHA@Email.com", new DateTime(2004, 05, 05));
-            await DBService.AddUser("Vlad", "Pulyak", "VladPulyak@Email.com", new DateTime(2003, 01, 25));
-            await DBService.AddAuthor("Alexander", "Pushkin", "Russia", new DateTime(1799, 05, 26));
-            await DBService.AddAuthor("Nikolaj", "Gogol", "Ukraine", new DateTime(1809, 03, 25));
-            await DBService.AddAuthor("Lev", "Tolstoi", "Russia", new DateTime(1828, 09, 09));
-            await DBService.AddBook("Kapitanskaya dochka", 1836, "Pushkin");
-            await DBService.AddBook("Skazka o tsare Saltane", 1831, "Pushkin");
-            await DBService.AddBook("Vij", 1833, "Gogol");
-            await DBService.AddBook("Mertvie dushi", 1842, "Gogol");
-            await DBService.AddBook("Mumu", 1854, "Tolstoi");
-            await DBService.GiveBookToUser("IlyaMaximov@Email.com", "Kapitanskaya dochka");
+            await AddUser("Ilya", "Maximov", "IlyaMaximov@Email.com", new DateTime(2002, 11, 21));
+            await AddUser("Andrei", "Polevoi", "ANDRUHA@Email.com", new DateTime(2004, 05, 05));
+            await AddUser("Vlad", "Pulyak", "VladPulyak@Email.com", new DateTime(2003, 01, 25));
+            await AddAuthor("Alexander", "Pushkin", "Russia", new DateTime(1799, 05, 26));
+            await AddAuthor("Nikolaj", "Gogol", "Ukraine", new DateTime(1809, 03, 25));
+            await AddAuthor("Lev", "Tolstoi", "Russia", new DateTime(1828, 09, 09));
+            await AddBook("Kapitanskaya dochka", 1836, "Pushkin");
+            await AddBook("Skazka o tsare Saltane", 1831, "Pushkin");
+            await AddBook("Vij", 1833, "Gogol");
+            await AddBook("Mertvie dushi", 1842, "Gogol");
+            await AddBook("Mumu", 1854, "Tolstoi");
+            await GiveBookToUser("IlyaMaximov@Email.com", "Kapitanskaya dochka");
 
         }
 
-        public static async Task GiveBookToUser(string userEmail, string bookName)
+        public async Task GiveBookToUser(string userEmail, string bookName)
         {
             using (MyDBContext db = new MyDBContext())
             {
@@ -112,39 +111,39 @@ namespace Homework_EfCore.Database
             }
         }
 
-        public static async Task ReturnBookFromUser(string userEmail, string bookName)
+        public async Task ReturnBookFromUser(string userEmail, string bookName)
         {
             using (MyDBContext db = new MyDBContext())
             {
                 var user = await db.Users.SingleOrDefaultAsync(q => q.Email == userEmail);
                 var book = await db.Books.SingleOrDefaultAsync(q => q.Name == bookName);
-                if (user != null && book != null)
-                {
-                    var data = await db.UserBooks.SingleOrDefaultAsync(q => q.UserId == user.UserId && q.BookId == book.BookId);
 
-                    if (data != null)
-                    {
-                        db.UserBooks.Remove(data);
-                        await db.SaveChangesAsync();
-                        info?.Invoke($"User {user.Email} returned the book {book.Name}");
-                    }
-                    else
-                    {
-                        info?.Invoke($"User {user.Email} never took the book {book.Name}");
-                    }
-                }
                 if (user == null)
                 {
                     info?.Invoke($"User with email <{userEmail}> is not exist");
+                    return;
                 }
                 if (book == null)
                 {
                     info?.Invoke($"Book with name <{bookName}> is not exist");
+                    return;
                 }
+
+                var data = await db.UserBooks.SingleOrDefaultAsync(q => q.UserId == user.UserId && q.BookId == book.BookId);
+
+                if (data == null)
+                {
+                    info?.Invoke($"User {user.Email} never took the book {book.Name}");
+                    return;
+                }
+
+                db.UserBooks.Remove(data);
+                await db.SaveChangesAsync();
+                info?.Invoke($"User {user.Email} returned the book {book.Name}");
             }
         }
 
-        public static async Task RemoveUselessUsers()
+        public async Task RemoveUselessUsers()
         {
             using (MyDBContext db = new MyDBContext())
             {
@@ -167,35 +166,18 @@ namespace Homework_EfCore.Database
             }
         }
 
-        public static async Task<List<BorrowedBooksViewModel>> ReturnBorrowedBooksData()
+        public async Task<List<BorrowedBooksViewModel>> ReturnBorrowedBooksData()
         {
             using (MyDBContext db = new MyDBContext())
             {
-                List<BorrowedBooksViewModel> borrowed = new List<BorrowedBooksViewModel>();
-                var userBooks = db.UserBooks.AsNoTracking().Select(q => new
+                return await db.UserBooks.Select(row => new BorrowedBooksViewModel
                 {
-                    UserId = q.UserId,
-                    BookId = q.BookId
-                });
-                foreach (var item in userBooks)
-                {
-                    using (MyDBContext dbforeach = new MyDBContext())
-                    {
-                        var user = await dbforeach.Users.AsNoTracking().SingleAsync(q => q.UserId == item.UserId);
-                        var book = await dbforeach.Books.AsNoTracking().SingleAsync(q => q.BookId == item.BookId);
-                        var author = await dbforeach.Authors.AsNoTracking().SingleAsync(q => q.AuthorId == book.AuthorId);
-                        BorrowedBooksViewModel borrowedBooks = new BorrowedBooksViewModel()
-                        {
-                            UserFullName = user.FirstName + " " + user.LastName,
-                            UserBirthDate = user.BirthDate,
-                            AuthorFullName = author.FirstName + " " + author.LastName,
-                            BookName = book.Name,
-                            BookYear = book.Year
-                        };
-                        borrowed.Add(borrowedBooks);
-                    }
-                }
-                return borrowed;
+                    UserFullName = row.User.FirstName + " " + row.User.LastName,
+                    UserBirthDate = row.User.BirthDate,
+                    AuthorFullName = row.Book.Author.FirstName + " " + row.Book.Author.LastName,
+                    BookName = row.Book.Name,
+                    BookYear = row.Book.Year
+                }).ToListAsync();
             }
         }
     }

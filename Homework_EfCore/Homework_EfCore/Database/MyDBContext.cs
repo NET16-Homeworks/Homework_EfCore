@@ -32,13 +32,6 @@ namespace Homework_EfCore.Database
             modelBuilder.ApplyConfiguration(new AuthorConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new UserBookConfiguration());
-
-            modelBuilder.Entity<User>().
-                HasMany(q => q.Books).
-                WithMany(q => q.Users).
-                UsingEntity<UserBooks>(
-                q => q.HasOne(q => q.Book).WithMany(q => q.UserBooks).HasForeignKey(q => q.BookId),
-                q => q.HasOne(q => q.User).WithMany(q => q.UserBooks).HasForeignKey(q => q.UserId));
         }
     }
 }

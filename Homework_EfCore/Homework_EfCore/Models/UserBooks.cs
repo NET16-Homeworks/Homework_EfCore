@@ -13,14 +13,4 @@ namespace Homework_EfCore.Models
         public int BookId { get; set; }
         public Book Book { get; set; }
     }
-
-    public class UserBookConfiguration : IEntityTypeConfiguration<UserBooks>
-    {
-        public void Configure(EntityTypeBuilder<UserBooks> builder)
-        {
-            builder.HasKey(x => x.UserBooksId);
-            builder.Property(q => q.UserId).IsRequired();
-            builder.Property(q => q.BookId).IsRequired();
-        }
-    }
 }
