@@ -6,11 +6,11 @@
 
         public DateTimeOffset UserBirthDate { get; set; }
 
-        public string ?BookName { get; set; }
+        public string? BookName { get; set; }
 
-        public int ?BookYear { get; set; }
+        public int? BookYear { get; set; }
 
-        public string ?AuthorFullName { get; set; }
+        public string? AuthorFullName { get; set; }
 
         public override string ToString()
         {

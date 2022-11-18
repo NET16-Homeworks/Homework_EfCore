@@ -2,11 +2,17 @@
     ViewData["Title"] = "Home Page";
 }
 
-@Html.ActionLink("AddData", "AddData", "Home")
+@Html.ActionLink("Add Authors", "AddAuthor", "Home")
 <hr>
-@Html.ActionLink("GetUsersInfo", "GetUsersInfo", "Home")
+@Html.ActionLink("Add Books", "AddBooksData", "Home")
 <hr>
-@Html.ActionLink("DeletedUsers", "DeleteUser", "Home")
+@Html.ActionLink("Add Users", "AddUser", "Home")
+<hr>
+@Html.ActionLink("Get Users' Info", "GetUsersInfo", "Home")
+<hr>
+@Html.ActionLink("Get Authors and their books", "GetBooksWithAuthors", "Home")
+<hr>
+@Html.ActionLink("Deleted Users", "DeleteUser", "Home")
 <hr>
 @Html.ActionLink("Return Book", "ReturnBookFromUser", "Home")
 <hr/>

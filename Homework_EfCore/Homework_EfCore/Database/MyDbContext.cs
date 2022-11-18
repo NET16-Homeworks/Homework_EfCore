@@ -10,7 +10,8 @@ namespace Homework_EfCore.Database
 
         public MyDbContext()
         {
-
+            //Database.EnsureDeleted();
+            //Database.EnsureCreated();
         }
 
         public DbSet<Author> Authors {get; set;}
@@ -35,22 +36,6 @@ namespace Homework_EfCore.Database
             modelBuilder.ApplyConfiguration(new AuthorConfiguration());
             modelBuilder.ApplyConfiguration(new BookConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
-
-            modelBuilder.Entity<User>()
-                .HasMany(q => q.Books)
-                .WithMany(q => q.Users)
-                .UsingEntity<UserBook>(
-                
-                j => j.HasOne(q => q.Book)
-                .WithMany(q => q.UserBooks)
-                .HasForeignKey(q => q.BookId)
-                .OnDelete(DeleteBehavior.Cascade),
-
-                j => j.HasOne(q => q.User)
-                .WithMany(q => q.UserBooks)
-                .HasForeignKey(q => q.UserId)
-                .OnDelete(DeleteBehavior.Cascade));
-        
             modelBuilder.ApplyConfiguration(new UserBookConfiguration());
         }
     }

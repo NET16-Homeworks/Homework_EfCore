@@ -16,10 +16,19 @@ namespace Homework_EfCore.Database.Configurations
             builder.HasIndex(q => q.Email).IsUnique();
             builder.Property(q => q.BirthDate).IsRequired();
 
-            //эту связь лучше написать в mydbcontext? таблице?
-            //builder.HasMany(q => q.Books)
-            //    .WithMany(q => q.Users)
-            //    .UsingEntity(j => j.ToTable("UserBooks"));
+            builder.HasMany(q => q.Books)
+                .WithMany(q => q.Users)
+                .UsingEntity<UserBook>(
+
+                j => j.HasOne(q => q.Book)
+                .WithMany(q => q.UserBooks)
+                .HasForeignKey(q => q.BookId)
+                .OnDelete(DeleteBehavior.Cascade),
+
+                j => j.HasOne(q => q.User)
+                .WithMany(q => q.UserBooks)
+                .HasForeignKey(q => q.UserId)
+                .OnDelete(DeleteBehavior.Cascade));
 
             builder.ToTable("Users");
         }

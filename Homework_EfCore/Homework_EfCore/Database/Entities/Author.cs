@@ -8,7 +8,7 @@
         public string LastName { get; set; }
         public string Country { get; set; }
 
-        public DateTimeOffset BirthDate { get; set; }
+        public DateTime BirthDate { get; set; }
 
         public ICollection<Book> Books { get; set; }
     }
