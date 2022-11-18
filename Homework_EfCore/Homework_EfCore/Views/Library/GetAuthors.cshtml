@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Authors>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>AuthorId</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Country</th>
+            <th>BirthDate</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.AuthorId</td>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Country</td>
+                <td>@user.BirthDate</td>
+            </tr>
+        }
+    </tbody>
+</table>

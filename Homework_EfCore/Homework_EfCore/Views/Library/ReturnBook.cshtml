@@ -1,0 +1,12 @@
+﻿@using (Html.BeginForm(FormMethod.Post))
+{
+    <div>
+        @Html.Label("userEmail")
+        @Html.TextBox("userEmail")
+    </div>
+    <div>
+        @Html.Label("bookName")
+        @Html.TextBox("bookName")
+    </div>
+    <button type="submit">Submit</button>
+}

@@ -1,0 +1,18 @@
+﻿@model Users;
+
+@using(Html.BeginForm(FormMethod.Post))
+{
+    @Html.LabelFor(q=>q.FirstName)
+    @Html.TextBoxFor(q=>q.FirstName) 
+    <br />
+    @Html.LabelFor(q=>q.LastName)
+    @Html.TextBoxFor(q=>q.LastName)
+    <br />
+    @Html.LabelFor(q=>q.Email)
+    @Html.TextBoxFor(q=>q.Email)
+    <br />
+    @Html.LabelFor(q=>q.BirthDate)
+    @Html.TextBoxFor(q=>q.BirthDate)
+    <br />
+    <button type="submit">Submit</button>
+}

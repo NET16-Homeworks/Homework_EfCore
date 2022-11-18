@@ -1,0 +1,25 @@
+﻿@model IEnumerable<UserBooksInfo>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>UserFullName</th>
+            <th>UserBirthDate</th>
+            <th>BookName</th>
+            <th>BookYear</th>
+            <th>AuthorFullName</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var userbook in Model)
+        {
+            <tr>
+                <td>@userbook.UserFullName</td>
+                <td>@userbook.UserBirthDate</td>
+                <td>@userbook.BookName</td>
+                <td>@userbook.BookYear</td>
+                <td>@userbook.AuthorFullName</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,21 @@
+﻿@model Books;
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    @Html.Label("UserEmail");
+    @Html.TextBox("userEmail");
+    <br />
+    @Html.LabelFor(q=>q.Name);
+    @Html.TextBoxFor(q=>q.Name);
+    <br />
+    @Html.Label("AuthorsFirstName");
+    @Html.TextBox("authorFirstName");
+    <br />
+    @Html.Label("AuthorsLastName");
+    @Html.TextBox("authorLastName");
+    <br />
+    @Html.LabelFor(q=>q.Year)
+    @Html.TextBoxFor(q=>q.Year)
+    <br />
+    <button type="submit">Submit</button>
+}
