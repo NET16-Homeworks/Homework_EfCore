@@ -305,7 +305,7 @@ public class HomeController : Controller
         if (books != null && user != null)
         {
             var userResult = await db.UserBooks
-                .SingleOrDefaultAsync(q => q.UserId == user.UserId);
+                .SingleOrDefaultAsync(q => q.UserId == user.UserId && q.BookId == books.BookId);
             //var bookResult = await db.UserBooks
             //    .FirstOrDefaultAsync(q => q.BookId == books.BookId);
 
