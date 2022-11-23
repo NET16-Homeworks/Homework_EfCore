@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Books'return";
+}
+
+<h4>
+    Bringing books back 
+</h4>
+
+@using (@Html.BeginForm("ReturnBookFromUser", "Home", FormMethod.Post))
+{
+    <p>
+        @Html.DisplayName("Email")
+        @Html.TextBox("userEmail")
+    </p>
+
+     <p>
+        @Html.Name("Book name")
+        @Html.TextBox("bookName")
+    </p>
+
+    <button type="submit">Bring the book back</button>
+@*    <button type="submit">Give book @Model.Book.Name to @Model.User.Email</button>*@
+}
+
+<hr>
+@Html.ActionLink("To Users' and their books' page", "GetUsersInfo")
+<br />
+@Html.ActionLink("Redirect to borrow books' page", "GiveBookToUser")

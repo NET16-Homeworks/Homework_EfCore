@@ -2,7 +2,20 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@Html.ActionLink("Add Authors", "AddAuthor", "Home")
+<hr>
+@Html.ActionLink("Add Books", "AddBooksData", "Home")
+<hr>
+@Html.ActionLink("Add Users", "AddUser", "Home")
+<hr>
+@Html.ActionLink("Get Users' Info", "GetUsersInfo", "Home")
+<hr>
+@Html.ActionLink("Get Authors and their books", "GetBooksWithAuthors", "Home")
+<hr>
+@Html.ActionLink("Deleted Users", "DeleteUser", "Home")
+<hr>
+@Html.ActionLink("Return Book", "ReturnBookFromUser", "Home")
+<hr/>
+@Html.ActionLink("Give book", "GiveBookToUser", "Home")
+<hr>
+@Html.ActionLink("Delete Users per index", "DeleteUsersPerIndex", "Home")
