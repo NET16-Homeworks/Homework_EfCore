@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "LENDING BOOK";
+}
+<h4>
+   LENDING BOOKS TO USERS
+</h4>
+
+@using (@Html.BeginForm("GiveBookToUser", "Home", FormMethod.Post))
+{
+    <p>
+        @Html.DisplayName("Email")
+        @Html.TextBox("userEmail")
+    </p>
+
+     <p>
+        @Html.Name("Book name")
+        @Html.TextBox("bookName")
+    </p>
+
+    <button type="submit">Give book</button>
+}
+
+@Html.ActionLink("To Users' and their books' page", "GetUsersInfo")
+<br />
+@Html.ActionLink("Redirect to lend books' page", "GiveBookToUser")
+
+
+
