@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homework_EfCore", "Homework_EfCore\Homework_EfCore.csproj", "{AC3C5714-61FC-4315-83BD-BF62F549B010}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC3C5714-61FC-4315-83BD-BF62F549B010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC3C5714-61FC-4315-83BD-BF62F549B010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC3C5714-61FC-4315-83BD-BF62F549B010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC3C5714-61FC-4315-83BD-BF62F549B010}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<AuthorsBookModel>
+@{
+    ViewBag.Title = "AUTHORS AND BOOKS IS HERE:";
+}
+<h4>
+    Authors and their books:
+</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(q => q.AuthorFullName)<th/>
+            <th>@Html.DisplayNameFor(q => q.BookName)<th/>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@item.AuthorFullName</td>
+                <td>@item.BookName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<hr />
+@Html.ActionLink("To Home Page", "Index")

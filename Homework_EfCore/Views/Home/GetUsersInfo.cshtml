@@ -1,0 +1,43 @@
+﻿@model IEnumerable<UserInfoModel>
+    @{
+        ViewBag.Title = "User information (including books taken)";
+    }
+    <h5>
+        USER INFO (BOOKS TAKEN TOO)
+    </h5>
+
+<table class="table">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(q => q.UserFullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(q => q.UserBirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(q => q.BookName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(q => q.BookYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(q => q.AuthorFullName)
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var infoModel in Model)
+        {
+            <tr>
+                <td>@infoModel.UserFullName</td>
+                <td>@infoModel.UserBirthDate.ToString("yyyy/MM/dd")</td>
+                <td>@infoModel.BookName</td>
+                <td>@infoModel.BookYear</td>
+                <td>@infoModel.AuthorFullName</td>
+            </tr>
+        }
+        </tbody>
+</table>
+
+@Html.ActionLink("Primary page", "Index")
