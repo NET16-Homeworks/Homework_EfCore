@@ -1,10 +1,10 @@
 ﻿namespace Homework_EfCore.Exceptions
 {
-    public class ErrorThrowerMiddleware
+    public class ErrorThrowerMiddlewareException
     {
         private readonly RequestDelegate _next;
 
-        public ErrorThrowerMiddleware(RequestDelegate next)
+        public ErrorThrowerMiddlewareException(RequestDelegate next)
         {
             _next = next;
         }
@@ -15,17 +15,17 @@
             {
                 await _next.Invoke(httpContext);
             }
-            catch (ObjectAlreadyExists ex)
+            catch (ObjectAlreadyExistsException ex)
             {
                 httpContext.Response.StatusCode = StatusCodes.Status409Conflict;
                 await httpContext.Response.WriteAsync(ex.Message);
             }
-            catch (ObjectNotFound ex)
+            catch (ObjectNotFoundException ex)
             {
                 httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
                 await httpContext.Response.WriteAsync(ex.Message);
             }
-            catch (IncorrectValue ex)
+            catch (IncorrectValueException ex)
             {
                 httpContext.Response.StatusCode = StatusCodes.Status418ImATeapot;
                 await httpContext.Response.WriteAsync(ex.Message);

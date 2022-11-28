@@ -81,7 +81,7 @@ public class HomeController : ControllerBase
 
     [HttpDelete]
     [Route("/RemoveUsersWithoutBooks")]
-    public async Task<string> RemoveUselessUsers()
+    public async Task<List<string>> RemoveUselessUsers()
     {
         return await _dbservice.RemoveUselessUsers();
     }

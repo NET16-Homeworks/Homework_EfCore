@@ -19,7 +19,7 @@ namespace Homework_EfCore.Database
 
         public Task<UserBookInfo> ReturnBookFromUser(UserBookInfo userBookInfo);
 
-        public Task<string> RemoveUselessUsers();
+        public Task<List<string>> RemoveUselessUsers();
 
         public Task<List<BorrowedBooksDto>> ReturnBorrowedBooksData();      
     }

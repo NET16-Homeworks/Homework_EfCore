@@ -22,7 +22,7 @@ app.UseDeveloperExceptionPage();
 
 app.UseStaticFiles();
 app.UseRouting();
-app.UseMiddleware<ErrorThrowerMiddleware>();
+app.UseMiddleware<ErrorThrowerMiddlewareException>();
 
 app.UseEndpoints(endpoints =>
 {
