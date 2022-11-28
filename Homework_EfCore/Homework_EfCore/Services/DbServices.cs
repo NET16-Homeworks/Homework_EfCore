@@ -140,7 +140,7 @@ namespace Homework_EfCore.Services
 
                 context.RemoveRange(usersWithoutBooks);
 
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
             
             return removedUsersList;

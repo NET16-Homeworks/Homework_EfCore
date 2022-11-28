@@ -9,6 +9,7 @@
         public DateTime BirthDate { get; set; }
 
         public Book Book { get; set; }
+        public ICollection<Book> Books { get; set; }
     }
 }
 

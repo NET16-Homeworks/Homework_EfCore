@@ -9,6 +9,7 @@ namespace Homework_EfCore.Configurations
         public void Configure(EntityTypeBuilder<UserBook> builder)
         {
             builder.HasKey(userBook => userBook.UserBookId);
+            builder.HasIndex(userBook => new { userBook.UserId, userBook.BookId }).IsUnique();
         }
     }
 }

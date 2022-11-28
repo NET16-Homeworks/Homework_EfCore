@@ -12,8 +12,8 @@ namespace Homework_EfCore.Configurations
             builder.Property(book => book.Name).HasMaxLength(100).IsRequired();
             builder.Property(book => book.Year).IsRequired();
             builder.HasOne(book => book.Author)
-                .WithOne(author => author.Book)
-                .HasForeignKey<Book>(book => book.AuthorId);
+                .WithMany(author => author.Books)
+                .HasForeignKey(book => book.AuthorId);
         }
     }
 }
