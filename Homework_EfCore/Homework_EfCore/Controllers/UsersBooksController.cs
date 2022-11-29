@@ -32,5 +32,10 @@ namespace Homework_EfCore.Controllers
 
             return RedirectToAction("Index", "UsersBooks");
         }
+
+        public async Task FillDb()
+        {
+            await _dbServices.FillDb();
+        }
     }
 }
