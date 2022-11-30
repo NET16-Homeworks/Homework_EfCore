@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Homework_EfCore.Services
 {
-    public class DbServices
+    public class _DbServices
     {
         public async Task FillDb()
         {

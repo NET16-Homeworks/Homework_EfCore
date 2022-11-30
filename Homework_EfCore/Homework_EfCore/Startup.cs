@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using Homework_EfCore.Extentions;
 
 namespace Homework_EfCore
 {
@@ -17,11 +18,7 @@ namespace Homework_EfCore
 
             services.AddSwaggerGen();
 
-            // services.AddInMemoryUserManagement();
-
-            // services.AddUserManagementByFile();
-
-            // services.AddEfCoreUserManagement(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddDbServices(Configuration.GetConnectionString("DefaultConnection"));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

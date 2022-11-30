@@ -6,7 +6,7 @@ namespace Homework_EfCore.Controllers
 {
     public class UsersBooksController : Controller
     {
-        private DbServices _dbServices = new();
+        private _DbServices _dbServices = new();
         public async Task<IActionResult> Index()
         {
             var usersBooks = await _dbServices.GetUsersBooksList();
