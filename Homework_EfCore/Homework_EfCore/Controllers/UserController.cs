@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Homework_EfCore.Services;
+using Homework_EfCore.Interfaces;
 using Homework_EfCore.Dtos;
 using Homework_EfCore.Entities;
 
@@ -9,15 +9,15 @@ namespace Homework_EfCore.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly UserServices _userService;
+        private readonly IUserServices _userService;
 
-        public UserController(UserServices userService)
+        public UserController(IUserServices userService)
         {
             _userService = userService;
         }
 
         [HttpGet]
-        [Route("/[controller]/{email:string}")]
+        [Route("/[controller]/{email}")]
         public async Task<UserDto> GetUserByEmail(string email)
         {
             return await _userService.Get(new User { Email = email });
@@ -25,7 +25,7 @@ namespace Homework_EfCore.Controllers
 
         [HttpGet]
         [Route("/[controller]/List")]
-        public async Task<List<UserDto>> GetUsersList(string email)
+        public async Task<List<UserDto>> GetUsersList()
         {
             return await _userService.GetList();
         }
@@ -38,14 +38,14 @@ namespace Homework_EfCore.Controllers
         }
 
         [HttpDelete]
-        [Route("/[controller]/Delete/{string:email}")]
+        [Route("/[controller]/Delete/{string}")]
         public async Task<UserDto> DeleteUser(string email)
         {
             return await _userService.Delete(new User { Email = email });
         }
 
         [HttpPut]
-        [Route("/[controller]/Update/{string:email}")]
+        [Route("/[controller]/Update")]
         public async Task<UserDto> UpdateUser([FromBody] User user)
         {
             return await _userService.Update(user);
